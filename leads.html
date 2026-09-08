@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leads · CRM Platform</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body data-page="leads">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i data-lucide="layout-dashboard" class="brand-icon"></i>
+        <span class="brand-text">CRM Platform</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link" data-nav="dashboard">
+          <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+        </a>
+        <a href="leads.html" class="nav-link" data-nav="leads">
+          <i data-lucide="kanban"></i><span>Leads</span>
+        </a>
+        <a href="contacts.html" class="nav-link" data-nav="contacts">
+          <i data-lucide="users"></i><span>Contacts</span>
+        </a>
+        <a href="analytics.html" class="nav-link" data-nav="analytics">
+          <i data-lucide="bar-chart-3"></i><span>Analytics</span>
+        </a>
+        <a href="settings.html" class="nav-link" data-nav="settings">
+          <i data-lucide="settings"></i><span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i data-lucide="menu"></i>
+        </button>
+        <h1 class="page-title">Sales Pipeline</h1>
+        <div class="topbar-actions">
+          <button class="icon-btn" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+          </button>
+          <div class="user-profile">
+            <span class="avatar-initials">AD</span>
+            <span class="user-name">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <p class="page-description">Interactive Kanban board for leads with stage shifts.</p>
+
+        <div class="pipeline-toolbar">
+          <button class="btn-primary" id="addLeadBtn">
+            <i data-lucide="plus"></i> Add Lead
+          </button>
+        </div>
+
+        <section class="kanban-board" aria-label="Lead pipeline stages">
+          <div class="kanban-column" data-stage="contacted">
+            <h2>Contacted</h2>
+            <div class="kanban-cards" data-stage-list="contacted"></div>
+          </div>
+          <div class="kanban-column" data-stage="qualified">
+            <h2>Qualified</h2>
+            <div class="kanban-cards" data-stage-list="qualified"></div>
+          </div>
+          <div class="kanban-column" data-stage="proposal">
+            <h2>Proposal</h2>
+            <div class="kanban-cards" data-stage-list="proposal"></div>
+          </div>
+          <div class="kanban-column" data-stage="closedWon">
+            <h2>Closed Won</h2>
+            <div class="kanban-cards" data-stage-list="closedWon"></div>
+          </div>
+        </section>
+
+        <div class="modal" id="addLeadModal" hidden>
+          <div class="modal-content">
+            <h2>Add Lead</h2>
+            <form id="addLeadForm">
+              <label for="leadName">Name</label>
+              <input type="text" id="leadName" name="leadName" required>
+              <label for="leadCompany">Company</label>
+              <input type="text" id="leadCompany" name="leadCompany">
+              <label for="leadValue">Deal Value ($)</label>
+              <input type="number" id="leadValue" name="leadValue" min="0" step="100">
+              <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelAddLead">Cancel</button>
+                <button type="submit" class="btn-primary">Save Lead</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="modal" id="modal-lead-tasks" hidden>
+          <div class="modal-content task-modal-content">
+            <h2 id="leadTasksTitle">Lead Tasks</h2>
+            <ul id="leadTaskList" class="task-list"></ul>
+            <form id="addTaskForm" class="task-form">
+              <input type="hidden" id="taskLeadId">
+              <label for="taskTitle">New task</label>
+              <input type="text" id="taskTitle" name="taskTitle" placeholder="e.g. Send a follow-up email" required>
+              <label for="taskDueAt">Due date</label>
+              <input type="date" id="taskDueAt" name="taskDueAt">
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority" name="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+              <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="closeLeadTasks">Close</button>
+                <button type="submit" class="btn-primary">Add Task</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics · CRM Platform</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="analytics">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i data-lucide="layout-dashboard" class="brand-icon"></i>
+        <span class="brand-text">CRM Platform</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link" data-nav="dashboard">
+          <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+        </a>
+        <a href="leads.html" class="nav-link" data-nav="leads">
+          <i data-lucide="kanban"></i><span>Leads</span>
+        </a>
+        <a href="contacts.html" class="nav-link" data-nav="contacts">
+          <i data-lucide="users"></i><span>Contacts</span>
+        </a>
+        <a href="analytics.html" class="nav-link" data-nav="analytics">
+          <i data-lucide="bar-chart-3"></i><span>Analytics</span>
+        </a>
+        <a href="settings.html" class="nav-link" data-nav="settings">
+          <i data-lucide="settings"></i><span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i data-lucide="menu"></i>
+        </button>
+        <h1 class="page-title">Sales Performance &amp; Forecasting</h1>
+        <div class="topbar-actions">
+          <button class="icon-btn" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+          </button>
+          <div class="user-profile">
+            <span class="avatar-initials">AD</span>
+            <span class="user-name">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <p class="page-description">Revenue trends and pipeline distribution charts.</p>
+
+        <section class="charts-grid" aria-label="Analytics charts">
+          <div class="chart-container">
+            <h2>Revenue Trend</h2>
+            <canvas id="revenueTrendChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h2>Pipeline Distribution</h2>
+            <canvas id="pipelineDistributionChart"></canvas>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

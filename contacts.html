@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts · CRM Platform</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body data-page="contacts">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i data-lucide="layout-dashboard" class="brand-icon"></i>
+        <span class="brand-text">CRM Platform</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Primary navigation">
+        <a href="index.html" class="nav-link" data-nav="dashboard">
+          <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
+        </a>
+        <a href="leads.html" class="nav-link" data-nav="leads">
+          <i data-lucide="kanban"></i><span>Leads</span>
+        </a>
+        <a href="contacts.html" class="nav-link" data-nav="contacts">
+          <i data-lucide="users"></i><span>Contacts</span>
+        </a>
+        <a href="analytics.html" class="nav-link" data-nav="analytics">
+          <i data-lucide="bar-chart-3"></i><span>Analytics</span>
+        </a>
+        <a href="settings.html" class="nav-link" data-nav="settings">
+          <i data-lucide="settings"></i><span>Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i data-lucide="menu"></i>
+        </button>
+        <h1 class="page-title">Contacts &amp; Accounts</h1>
+        <div class="topbar-actions">
+          <button class="icon-btn" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+          </button>
+          <div class="user-profile">
+            <span class="avatar-initials">AD</span>
+            <span class="user-name">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <p class="page-description">Searchable table with filters and contact details.</p>
+
+        <div class="table-toolbar">
+          <input type="search" id="contactSearch" placeholder="Search contacts..." class="search-input">
+          <select id="contactFilter" class="filter-select">
+            <option value="all">All Accounts</option>
+            <option value="lead">Leads</option>
+            <option value="customer">Customers</option>
+          </select>
+        </div>
+
+        <section class="table-wrapper" aria-label="Contacts directory">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="contactsTableBody"></tbody>
+          </table>
+        </section>
+
+        <div class="modal" id="editContactModal" hidden>
+          <div class="modal-content">
+            <h2>Edit Contact</h2>
+            <form id="editContactForm">
+              <input type="hidden" id="editContactId">
+              <label for="editContactName">Name</label>
+              <input type="text" id="editContactName" name="editContactName" required>
+              <label for="editContactCompany">Company</label>
+              <input type="text" id="editContactCompany" name="editContactCompany">
+              <label for="editContactEmail">Email</label>
+              <input type="email" id="editContactEmail" name="editContactEmail">
+              <label for="editContactPhone">Phone</label>
+              <input type="tel" id="editContactPhone" name="editContactPhone">
+              <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="cancelEditContact">Cancel</button>
+                <button type="submit" class="btn-primary">Save Contact</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <aside class="activity-drawer" id="contact-activity-drawer" hidden aria-labelledby="contactActivityTitle">
+          <div class="activity-drawer-content">
+            <div class="activity-drawer-header">
+              <h2 id="contactActivityTitle">Interaction History</h2>
+              <button type="button" class="icon-btn" id="closeContactActivity" aria-label="Close interaction history">
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+            <div id="contactActivityTimeline" class="contact-activity-timeline"></div>
+            <form id="contactActivityForm" class="activity-log-form">
+              <input type="hidden" id="activityContactId">
+              <label for="activityType">Interaction type</label>
+              <select id="activityType" name="activityType">
+                <option value="Call">Call</option>
+                <option value="Email">Email</option>
+                <option value="Meeting">Meeting</option>
+              </select>
+              <label for="activityNotes">Notes</label>
+              <textarea id="activityNotes" name="activityNotes" rows="4" required placeholder="Add interaction notes..."></textarea>
+              <label for="activityTimestamp">Date and time</label>
+              <input type="datetime-local" id="activityTimestamp" name="activityTimestamp">
+              <button type="submit" class="btn-primary">Log Interaction</button>
+            </form>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
