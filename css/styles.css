@@ -4,13 +4,15 @@
    ========================================================================== */
 
 :root {
-  --color-primary: #2563EB;
-  --color-accent: #10B981;
-  --color-warning: #F59E0B;
-  --color-text: #0F172A;
-  --color-bg: #F8FAFC;
+  --color-primary: #117ACA;
+  --color-primary-dark: #0B4F8A;
+  --color-accent: #008A8A;
+  --color-warning: #B86B00;
+  --color-text: #071D33;
+  --color-bg: #F2F6FA;
   --color-surface: #FFFFFF;
-  --color-border: #E2E8F0;
+  --color-border: #C9D6E2;
+  --color-muted: #50657A;
 
   --sidebar-width: 240px;
   --sidebar-width-collapsed: 72px;
@@ -18,8 +20,8 @@
 
   --radius-sm: 6px;
   --radius-md: 10px;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 1px 2px rgba(7, 29, 51, 0.08);
+  --shadow-md: 0 4px 12px rgba(7, 29, 51, 0.14);
 }
 
 * {
@@ -274,7 +276,7 @@ button {
 }
 
 .btn-primary:hover {
-  background-color: #1D4ED8;
+  background-color: var(--color-primary-dark);
 }
 
 .btn-secondary {
@@ -905,13 +907,13 @@ button {
 }
 
 .status-badge.status-customer {
-  background-color: rgba(16, 185, 129, 0.12);
-  color: #047857;
+  background-color: rgba(0, 138, 138, 0.12);
+  color: #006B6B;
 }
 
 .status-badge.status-lead {
-  background-color: rgba(37, 99, 235, 0.12);
-  color: #1D4ED8;
+  background-color: rgba(17, 122, 202, 0.12);
+  color: var(--color-primary-dark);
 }
 
 .actions-cell {
@@ -927,10 +929,10 @@ button {
 /* ---------- Dark Mode ---------- */
 
 body.dark-mode {
-  --color-text: #F1F5F9;
-  --color-bg: #0F172A;
-  --color-surface: #1E293B;
-  --color-border: #334155;
+  --color-text: #EAF3F8;
+  --color-bg: #071D33;
+  --color-surface: #102F4A;
+  --color-border: #28516F;
 }
 
 body.dark-mode .nav-link {

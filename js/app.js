@@ -510,6 +510,7 @@
 
     const searchInput = document.getElementById('contactSearch');
     const filterSelect = document.getElementById('contactFilter');
+    const exportContactsBtn = document.getElementById('exportContactsBtn');
     const editModal = document.getElementById('editContactModal');
     const editForm = document.getElementById('editContactForm');
     const cancelEditBtn = document.getElementById('cancelEditContact');
@@ -572,16 +573,47 @@
       activityForm.reset();
     }
 
-    function render() {
+    function getFilteredContacts() {
       const term = (searchInput?.value || '').toLowerCase().trim();
       const filter = filterSelect?.value || 'all';
 
-      const filtered = state.contacts.filter((contact) => {
+      return state.contacts.filter((contact) => {
         const matchesTerm = !term || [contact.name, contact.company, contact.email]
           .some((field) => (field || '').toLowerCase().includes(term));
         const matchesFilter = filter === 'all' || contact.status === filter;
         return matchesTerm && matchesFilter;
       });
+    }
+
+    function escapeCsvValue(value) {
+      const text = String(value ?? '');
+      const safeText = /^[=+\-@]/.test(text) ? `'${text}` : text;
+      return `"${safeText.replace(/"/g, '""')}"`;
+    }
+
+    function exportContacts() {
+      const headers = ['ID', 'Name', 'Company', 'Email', 'Phone', 'Status'];
+      const rows = getFilteredContacts().map((contact) => [
+        contact.id,
+        contact.name,
+        contact.company,
+        contact.email,
+        contact.phone,
+        contact.status,
+      ]);
+      const csv = `\uFEFF${[headers, ...rows]
+        .map((row) => row.map(escapeCsvValue).join(','))
+        .join('\r\n')}`;
+      const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'crm-contacts.csv';
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function render() {
+      const filtered = getFilteredContacts();
 
       tbody.innerHTML = '';
 
@@ -764,6 +796,7 @@
 
     if (searchInput) searchInput.addEventListener('input', render);
     if (filterSelect) filterSelect.addEventListener('change', render);
+    if (exportContactsBtn) exportContactsBtn.addEventListener('click', exportContacts);
 
     render();
   }
@@ -801,8 +834,8 @@
           datasets: [{
             label: 'Revenue Won',
             data: totals,
-            borderColor: '#2563EB',
-            backgroundColor: 'rgba(37, 99, 235, 0.12)',
+            borderColor: '#117ACA',
+            backgroundColor: 'rgba(17, 122, 202, 0.12)',
             tension: 0.35,
             fill: true,
           }],
@@ -825,7 +858,7 @@
           labels: stageOrder.map((stage) => STAGE_LABELS[stage]),
           datasets: [{
             data: counts,
-            backgroundColor: ['#2563EB', '#F59E0B', '#8B5CF6', '#10B981'],
+            backgroundColor: ['#117ACA', '#B86B00', '#426B8A', '#008A8A'],
           }],
         },
         options: {
