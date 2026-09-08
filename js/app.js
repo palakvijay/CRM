@@ -601,6 +601,15 @@
         contact.phone,
         contact.status,
       ]);
+
+      if (window.XLSX) {
+        const worksheet = window.XLSX.utils.aoa_to_sheet([headers, ...rows]);
+        const workbook = window.XLSX.utils.book_new();
+        window.XLSX.utils.book_append_sheet(workbook, worksheet, 'Contacts');
+        window.XLSX.writeFile(workbook, 'crm-contacts.xlsx');
+        return;
+      }
+
       const csv = `\uFEFF${[headers, ...rows]
         .map((row) => row.map(escapeCsvValue).join(','))
         .join('\r\n')}`;
